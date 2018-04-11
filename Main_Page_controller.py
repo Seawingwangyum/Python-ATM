@@ -11,9 +11,9 @@ class MainController:
         self.master = parent
         self.main_gui = MainWindow(self.master, bank_account[1])
 
-        self.main_gui.deposit_button.bind("<Button-1>", self.deposit)
-        self.main_gui.withdraw_button.bind("<Button-1>", self.withdraw)
-        self.main_gui.check_balance_button.bind("<Button-1>", self.check_balance)
+        self.main_gui.deposit_button.config(command=self.deposit)
+        self.main_gui.withdraw_button.config(command=self.withdraw)
+        self.main_gui.check_balance_button.config(command=self.check_balance)
 
     def open_file(self,account):
         with open('account.csv', 'r') as bank_accounts:
@@ -29,7 +29,7 @@ class MainController:
 
 
     def deposit(self):
-        pass
+        messagebox.showinfo(title='Deposit',message='Trevor is a soyboy')
 
     def withdraw(self):
         pass

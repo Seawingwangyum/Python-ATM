@@ -10,10 +10,11 @@ class MainWindow:
         # as attributes of this window
         self.username = account
         self.master = parent
-
+        self.master.title('Main')
         # set main window attributes such as title, geometry etc
         #
         self.master.geometry('600x400')
+
 
         self.top_frame = Frame(self.master)
         self.options_frame = Frame(self.master)
