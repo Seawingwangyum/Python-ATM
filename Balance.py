@@ -1,5 +1,5 @@
 from tkinter import *
-class check_balance:
+class balance:
     def __init__(self, parent):
         self.master = parent
         self.master.geometry("400x140")

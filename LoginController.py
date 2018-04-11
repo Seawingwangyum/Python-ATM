@@ -1,3 +1,4 @@
+
 from tkinter import *
 from tkinter import messagebox
 import csv
@@ -15,8 +16,6 @@ class LoginController:
 
     def login(self, event = 'none'):
         all_accounts = []
-        user_exist = False
-        password_correct = False
         credit_card = self.login_gui.name_entry.get()
         pin = self.login_gui.pass_entry.get()
         with open('account.csv', 'r') as bank_accounts:
@@ -25,15 +24,17 @@ class LoginController:
             next(csv_reader)
 
             for line in csv_reader:
+                user_exist = False
+                password_correct = False
                 if line[4] == credit_card:
                     user_exist = True
                     if line[2] == pin:
                         password_correct = True
-                        account = line
+                        all_accounts.append(line)
 
-
-        if user_exist and password_correct:
-            MainWindow()
+        if len(all_accounts) > 0:
+            for user in all_accounts:
+                MainWindow(self.master,user[0])
 
         elif not user_exist:
             messagebox.showinfo(title='Not in database', message='Credit Card Number is not in our Files')
@@ -44,6 +45,6 @@ class LoginController:
 
 
 if __name__ == "__main__":
-        root = Tk()
-        LoginController(root)
-        mainloop()
+    root = Tk()
+    LoginController(root)
+    mainloop()
