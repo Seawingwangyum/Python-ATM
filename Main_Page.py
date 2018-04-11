@@ -1,5 +1,8 @@
 from tkinter import *
 from tkinter import messagebox
+from Deposit import deposit
+from Withdraw import withdraw
+from Balance import balance
 
 
 class MainWindow:
@@ -35,9 +38,9 @@ class MainWindow:
         # define/create widgets and bind to events
         #
         self.Welcome_label = Label(self.top_frame, font=100, height=2, text='Welcome '+self.username+"!")
-        self.deposit_button = Button(self.options_frame, width=50, height=3, text="Deposit", pady=5)
-        self.withdraw_button = Button(self.options_frame, width=50, height=3, text="Withdraw", pady=5)
-        self.check_balance_button = Button(self.options_frame, width=50, height=3, text="Check Balance", pady=5)
+        self.deposit_button = Button(self.options_frame, width=50, height=3, text="Deposit", pady=5, command=self.OpenDeposit)
+        self.withdraw_button = Button(self.options_frame, width=50, height=3, text="Withdraw", pady=5, command=self.OpenWithdraw)
+        self.check_balance_button = Button(self.options_frame, width=50, height=3, text="Check Balance", pady=5, command=self.OpenBalance)
         self.done_button = Button(self.bottom_frame, height=1, width=7, text="Done")
 
         # place widgets in window (ie use pack or grid or whatever layout manager to place widgets)
@@ -59,6 +62,22 @@ class MainWindow:
 
     #def _command2(self):
     #    pass
+
+    def OpenDeposit(self):
+        self.master.withdraw()
+        self.newwindow = Toplevel(self.master)
+        deposit(self.newwindow)
+
+    def OpenWithdraw(self):
+        self.master.withdraw()
+        self.newwindow = Toplevel(self.master)
+        withdraw(self.newwindow)
+
+    def OpenBalance(self):
+        self.master.withdraw()
+        self.newwindow = Toplevel(self.master)
+        balance(self.newwindow)
+        
 
 
 if __name__ == "__main__":
