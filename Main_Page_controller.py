@@ -1,6 +1,9 @@
 from tkinter import *
 from tkinter import messagebox
 import csv
+from Deposit import *
+from Withdraw import *
+from Check_Balance import *
 
 from Main_Page import MainWindow
 
@@ -29,13 +32,19 @@ class MainController:
 
 
     def deposit(self):
-        messagebox.showinfo(title='Deposit',message='Trevor is a soyboy')
-
+        self.master.withdraw()
+        self.newwindow = Toplevel(self.master)
+        deposit(self.newwindow)
+        
     def withdraw(self):
-        pass
+        self.master.withdraw()
+        self.newwindow = Toplevel(self.master)
+        withdraw(self.newwindow)
 
     def check_balance(self):
-        pass
+        self.master.withdraw()
+        self.newwindow = Toplevel(self.master)
+        check_balance(self.newwindow)
 
 if __name__ == "__main__":
     root = Tk()
