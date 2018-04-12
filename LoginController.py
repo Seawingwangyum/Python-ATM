@@ -14,6 +14,8 @@ class LoginController:
 
 
     def login(self, event = 'none'):
+        user_exist = 0
+        password_correct = 0
         all_accounts = []
         credit_card = self.login_gui.name_entry.get()
         pin = self.login_gui.pass_entry.get()
@@ -23,12 +25,10 @@ class LoginController:
             next(csv_reader)
 
             for line in csv_reader:
-                user_exist = False
-                password_correct = False
                 if line[4] == credit_card:
-                    user_exist = True
+                    user_exist += 1
                     if line[2] == pin:
-                        password_correct = True
+                        password_correct += 1
                         all_accounts.append(line)
 
         if len(all_accounts) > 0:
@@ -42,10 +42,10 @@ class LoginController:
                 self.login_gui.name_entry.delete(0,'end')
                 self.login_gui.pass_entry.delete(0,'end')
 
-        elif not user_exist:
+        elif user_exist == 0:
             messagebox.showinfo(title='Not in database', message='Credit Card Number is not in our Files')
 
-        elif not password_correct:
+        elif password_correct == 0:
             messagebox.showinfo(title='Incorrect Pin', message='Incorrect Pin, Please try again')
 
     def onCloseOtherFrame(self, otherframe):
