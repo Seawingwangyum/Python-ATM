@@ -4,8 +4,6 @@ import csv
 from Deposit import *
 from Withdraw import *
 from Check_Balance import *
-from LoginController import *
-
 from Main_Page import MainWindow
 
 
@@ -34,8 +32,10 @@ class MainController:
 
     def deposit(self):
         self.master.withdraw()
-        self.newwindow = Toplevel(self.master)
+        self.newwindow = Toplevel()
         deposit(self.newwindow)
+        self.Cancelbutton()
+
         
     def withdraw(self):
         self.master.withdraw()
@@ -47,7 +47,15 @@ class MainController:
         self.newwindow = Toplevel()
         check_balance(self.newwindow)
 
-        
+    def onCloseOtherFrame(self, otherframe):
+        otherframe.destroy()
+        self.master.deiconify()
+
+    def Cancelbutton(self):
+        self.cancel = lambda: self.onCloseOtherFrame(self.newwindow)
+        self.button_frame = Frame(self.newwindow)
+        self.cancel_button = Button(self.newwindow, text="Cancel", width=10,command=self.cancel)
+        self.cancel_button.grid(row=1, column=0, sticky=W, padx=50)
 
 
 
