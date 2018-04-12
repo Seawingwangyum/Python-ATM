@@ -10,6 +10,7 @@ class loginscreen:
         # self.master.configure(background="pink")
         self.master.title("login window")
 
+        
         self.name_frame = Frame(self.master)
         self.pass_frame = Frame(self.master)
         self.button_frame = Frame(self.master)

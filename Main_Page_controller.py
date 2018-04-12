@@ -4,6 +4,7 @@ import csv
 from Deposit import *
 from Withdraw import *
 from Check_Balance import *
+from LoginController import *
 
 from Main_Page import MainWindow
 
@@ -43,8 +44,13 @@ class MainController:
 
     def check_balance(self):
         self.master.withdraw()
-        self.newwindow = Toplevel(self.master)
+        self.newwindow = Toplevel()
         check_balance(self.newwindow)
+
+        
+
+
+
 
 if __name__ == "__main__":
     root = Tk()

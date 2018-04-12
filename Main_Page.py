@@ -22,24 +22,17 @@ class MainWindow:
 
         self.top_frame.grid(row=0, pady=5, padx=110)
         self.options_frame.grid(row=1, pady=5, padx=110)
-        self.bottom_frame.grid(row=2, pady=5, padx=110)
+        # self.bottom_frame.grid(row=2, pady=5, padx=110)
 
         # set up menus if there are any
         #
-
-        # define frames if needed
-        #
-        self.top_frame.grid(row=0, pady=5)
-        self.options_frame.grid(row=1, pady=5)
-        self.bottom_frame.grid(row=2, pady=5)
-
         # define/create widgets and bind to events
         #
         self.Welcome_label = Label(self.top_frame, font=100, height=2, text='Welcome '+self.username+"!")
         self.deposit_button = Button(self.options_frame, width=50, height=3, text="Deposit", pady=5)
         self.withdraw_button = Button(self.options_frame, width=50, height=3, text="Withdraw", pady=5)
         self.check_balance_button = Button(self.options_frame, width=50, height=3, text="Check Balance", pady=5)
-        self.done_button = Button(self.bottom_frame, height=1, width=7, text="Done")
+        # self.done_button = Button(self.bottom_frame, height=1, width=7, text="Done")
 
         # place widgets in window (ie use pack or grid or whatever layout manager to place widgets)
         #
@@ -47,7 +40,7 @@ class MainWindow:
         self.deposit_button.grid(row=0,padx=5, pady=10)
         self.withdraw_button.grid(row=1, padx=5, pady=10)
         self.check_balance_button.grid(row=2, padx=5, pady=10)
-        self.done_button.pack(side=RIGHT, padx=5, pady=40)
+        # self.done_button.pack(side=RIGHT, padx=5, pady=40)
 
 
 

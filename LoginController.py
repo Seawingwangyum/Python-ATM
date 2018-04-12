@@ -1,9 +1,9 @@
 from tkinter import *
 from tkinter import messagebox
 import csv
-
+from Main_Page_controller import *
 from LoginScreen import loginscreen
-from Main_Page import MainWindow
+
 
 class LoginController:
     def __init__(self, parent):
@@ -33,13 +33,24 @@ class LoginController:
 
         if len(all_accounts) > 0:
             for user in all_accounts:
-                MainWindow(self.master,user[0])
+                self.newwindow = Toplevel()
+                self.master.withdraw()
+                MainController(self.newwindow,user[0])
+                self.logout = lambda: self.onCloseOtherFrame(self.newwindow)
+                self.logout_button = Button(self.newwindow, text="done", command=self.logout)
+                self.logout_button.grid(row=2, padx=5, pady=10)
+                self.login_gui.name_entry.delete(0,'end')
+                self.login_gui.pass_entry.delete(0,'end')
 
         elif not user_exist:
             messagebox.showinfo(title='Not in database', message='Credit Card Number is not in our Files')
 
         elif not password_correct:
             messagebox.showinfo(title='Incorrect Pin', message='Incorrect Pin, Please try again')
+
+    def onCloseOtherFrame(self, otherframe):
+        otherframe.destroy()
+        self.master.deiconify()
 
 
 
