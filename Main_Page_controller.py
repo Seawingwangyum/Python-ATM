@@ -44,11 +44,13 @@ class MainController:
         self.master.withdraw()
         self.newwindow = Toplevel(self.master)
         withdraw(self.newwindow)
+        self.Cancelbutton()
 
     def check_balance(self):
         self.master.withdraw()
         self.newwindow = Toplevel()
         check_balance(self.newwindow)
+        self.Cancelbutton()
 
     def onCloseOtherFrame(self, otherframe):
         otherframe.destroy()
