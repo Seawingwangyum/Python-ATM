@@ -2,7 +2,7 @@ from tkinter import *
 
 class deposit:
 
-    def __init__(self, parent):
+    def __init__(self, parent, account):
         self.master = parent
         self.master.geometry("400x140")
         
@@ -26,5 +26,5 @@ class deposit:
 
 if __name__ == "__main__":
     root = Tk()
-    deposit(root)
+    deposit(root, "hello")
     mainloop()

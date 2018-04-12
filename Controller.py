@@ -1,18 +1,17 @@
-from Transactionlog import *
+#from Transactionlog import *
 
 
-class account:
+class acc_info:
 
     __NEXT__ACCT_NUM = 10000
     __CHARGE_FEE = 10
 
-    def __init__(self, balance=0, first_name="Anon", last_name = "nymous"):
-        self.first_name = first_name
-        self.last_name = last_name
-        self.account_num = account.__NEXT__ACCT_NUM
-        self.balance = balance
-        self.account_log = Transaction_log()
-        account.__NEXT__ACCT_NUM += 1
+    def __init__(self, list):
+        self.first_name = list[0]
+        self.last_name  = list[1]
+        self.account_num= list[2]
+        self.balance    = list[3]
+        self.account_log= list[4]
         return
 
     @property
