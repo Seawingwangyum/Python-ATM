@@ -32,12 +32,16 @@ class Terminal:
 if __name__ == '__main__':
     user = Terminal()
     option = user.options()
-    if option == '1':
-        user.enter_user()
-        option2 = user.edit_user()
-        if option2 == '1':
-            user.account_info()
-        elif option2 == '2':
-            user.change_account_type()
-        elif option == '3':
-            user.change_account_name()
+    while option != '5':
+        if option == '1':
+            user.enter_user()
+            option2 = user.edit_user()
+            if option2 == '1':
+                user.account_info()
+            elif option2 == '2':
+                user.change_account_type()
+            elif option == '3':
+                user.change_account_name()
+            else:
+                print('Invalid option')
+        option = user.options()
