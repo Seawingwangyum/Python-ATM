@@ -15,6 +15,7 @@ class withdraw:
         
         self.action_label = Label(self.information_frame,text="withdraw: ")
         self.withdraw_amount = Entry(self.information_frame, width=63)
+        self.cancel_button = Button(self.master, text="Cancel", width=10, command=self.cancel_transaction)
         self.confirm_button = Button(self.master, text="Confirm", width=10, command = self.withdraw_money)
 
         self.information_frame.grid(row=0, column=0)
@@ -22,6 +23,7 @@ class withdraw:
         self.action_label.grid(row=0,column=0, pady=10)
         self.withdraw_amount.grid(row=1, column=0, padx=10)
         self.button_frame.grid(row=1,column=0, pady=20)
+        self.cancel_button.grid(row=1, column=0,padx=50, sticky=W)
         self.confirm_button.grid(row=1, column=0, padx=50, sticky=E)
 
     def withdraw_money(self):
@@ -29,13 +31,19 @@ class withdraw:
             money = self.withdraw_amount.get()
             accepted = self.account.withdraw(int(money))
             if accepted == True:
-                messagebox.showinfo(title="confirmation", message="you have withdrawied ${}".format(money))
+                self.master.withdraw()
+                messagebox.showinfo(title="confirmation", message="you have withdrawed ${}".format(money))
+                self.master.deiconify()
                 self.last_menu.deiconify()
                 self.master.destroy()
         except ValueError:
             self.master.withdraw()
             messagebox.showinfo(title="Invalid", message="trevor is a soyboy")
             self.master.deiconify()
+
+    def cancel_transaction(self):
+        self.last_menu.deiconify()
+        self.master.destroy()
         
 if __name__ == "__main__":
     root = Tk()

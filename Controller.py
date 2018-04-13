@@ -3,9 +3,6 @@
 
 class acc_info:
 
-    __NEXT__ACCT_NUM = 10000
-    __CHARGE_FEE = 10
-
     def __init__(self, list):
         print(list)
         self.acc_num = list[0]
@@ -24,8 +21,8 @@ class acc_info:
 
 
     def withdraw(self, amount):
-        if amount < 0 and amount >= self.balance:
-            self.balance = self.balance + amount
+        if (amount <= self.balance) and (amount > 0):
+            self.balance -= amount
             return True
         else:
             return False

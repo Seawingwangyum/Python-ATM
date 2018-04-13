@@ -34,7 +34,7 @@ class LoginController:
         if len(all_accounts) > 0:
             for user in all_accounts:
                 self.newwindow = Toplevel()
-                self.master.withdraw()
+                # self.master.withdraw()
                 MainController(self.newwindow,user[0])
                 self.logout = lambda: self.onCloseOtherFrame(self.newwindow)
                 self.logout_button = Button(self.newwindow, text="done", command=self.logout)
