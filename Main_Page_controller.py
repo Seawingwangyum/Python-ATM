@@ -11,20 +11,6 @@ import shutil
 
 from Main_Page import MainWindow
 
-#This is a basic function for writing csv files
-def write_file(account):
-    tempfile = NamedTemporaryFile(mode ='w', delete=False, newline='')
-    fields = ["account number", "name", "pin", "type", "cc#", "balance", "translog"]
-
-    with open('account2.csv', 'r') as csvfile, tempfile:
-        reader = csv.DictReader(csvfile, fieldnames= fields)
-        writer = csv.DictWriter(tempfile, fieldnames= fields)
-        for row in reader:
-            if row['account number'] == account[0]:
-                row['account number'], row['name'],row['pin'],row['type'],row['cc#'],row['balance'],row['translog'] = account[0],account[1],account[2],account[3],account[4],account[5],account[6]
-            row = {'account number': row['account number'], 'name': row['name'], 'pin': row['pin'],'type': row['type'],"cc#": row['cc#'],"balance": row['balance'], "translog": row['translog']}
-            writer.writerow(row)
-    shutil.move(tempfile.name, 'account2.csv')
 
 class MainController:
     def __init__(self, parent, account):
