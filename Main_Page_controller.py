@@ -4,14 +4,31 @@ import csv
 from Deposit import *
 from Withdraw import *
 from Check_Balance import *
-from Main_Page import MainWindow
-from Controller import *
+from LoginController import *
+from tempfile import NamedTemporaryFile
+import shutil
 
+
+from Main_Page import MainWindow
+
+#This is a basic function for writing csv files
+def write_file(account):
+    tempfile = NamedTemporaryFile(mode ='w', delete=False, newline='')
+    fields = ["account number", "name", "pin", "type", "cc#", "balance", "translog"]
+
+    with open('account2.csv', 'r') as csvfile, tempfile:
+        reader = csv.DictReader(csvfile, fieldnames= fields)
+        writer = csv.DictWriter(tempfile, fieldnames= fields)
+        for row in reader:
+            if row['account number'] == account[0]:
+                row['account number'], row['name'],row['pin'],row['type'],row['cc#'],row['balance'],row['translog'] = account[0],account[1],account[2],account[3],account[4],account[5],account[6]
+            row = {'account number': row['account number'], 'name': row['name'], 'pin': row['pin'],'type': row['type'],"cc#": row['cc#'],"balance": row['balance'], "translog": row['translog']}
+            writer.writerow(row)
+    shutil.move(tempfile.name, 'account2.csv')
 
 class MainController:
     def __init__(self, parent, account):
         bank_account = self.open_file(account)
-        self.acc_obj = acc_info(account)
         self.master = parent
         self.main_gui = MainWindow(self.master, bank_account[1])
 
@@ -19,9 +36,8 @@ class MainController:
         self.main_gui.withdraw_button.config(command=self.withdraw)
         self.main_gui.check_balance_button.config(command=self.check_balance)
 
-
     def open_file(self,account):
-        with open('account.csv', 'r') as bank_accounts:
+        with open('account2.csv', 'r') as bank_accounts:
             csv_reader = csv.reader(bank_accounts)
 
             next(csv_reader)
@@ -29,38 +45,25 @@ class MainController:
             for line in csv_reader:
                 if line[0] == account:
                     bank_account = line
-            print(bank_account)
-            return bank_account
 
+        return bank_account
 
     def deposit(self):
         self.master.withdraw()
-        self.newwindow = Toplevel()
-        deposit(self.newwindow, self.acc_obj)
-        self.Cancelbutton()
-
+        self.newwindow = Toplevel(self.master)
+        deposit(self.newwindow)
         
     def withdraw(self):
         self.master.withdraw()
         self.newwindow = Toplevel(self.master)
         withdraw(self.newwindow)
-        self.Cancelbutton()
 
     def check_balance(self):
         self.master.withdraw()
         self.newwindow = Toplevel()
         check_balance(self.newwindow)
-        self.Cancelbutton()
 
-    def onCloseOtherFrame(self, otherframe):
-        otherframe.destroy()
-        self.master.deiconify()
-
-    def Cancelbutton(self):
-        self.cancel = lambda: self.onCloseOtherFrame(self.newwindow)
-        self.button_frame = Frame(self.newwindow)
-        self.cancel_button = Button(self.newwindow, text="Cancel", width=10,command=self.cancel)
-        self.cancel_button.grid(row=1, column=0, sticky=W, padx=50)
+        
 
 
 
@@ -69,3 +72,4 @@ if __name__ == "__main__":
     root = Tk()
     MainController(root,'10003')
     mainloop()
+    write_file(['10004','Justin Salisi','1996', 'savings','12345678901234569','25000','10004.csv'])
