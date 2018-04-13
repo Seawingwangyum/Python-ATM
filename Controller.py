@@ -7,17 +7,16 @@ class acc_info:
     __CHARGE_FEE = 10
 
     def __init__(self, list):
-        self.first_name = list[0]
-        self.last_name  = list[1]
-        self.account_num= list[2]
-        self.balance    = list[3]
-        self.account_log= list[4]
+        print(list)
+        self.acc_num = list[0]
+        self.name = list[1]
+        self.password = list[2]
+        self.acc_type = list[3]
+        self.card_num= list[4]
+        self.balance= int(list[5])
+        self.Transactionlog = list[6]
         return
 
-    @property
-    def full_name(self):
-        fullname = "{} {}".format(self.first_name, self.last_name)
-        return fullname
 
     @property
     def return_balance(self):
@@ -25,18 +24,19 @@ class acc_info:
 
 
     def withdraw(self, amount):
-        if self.balance >= amount and amount >= 0:
-            self.balance = self.account_log.log_withdraw(amount, self.balance, True)
+        if amount < 0 and amount >= self.balance:
+            self.balance = self.balance + amount
+            return True
         else:
-            self.balance = self.account_log.log_withdraw(amount, self.balance, False)
-        return
+            return False
 
     def deposit(self, amount):
         if amount > 0:
-            self.balance = self.account_log.log_deposit(amount, self.balance, True)
+            self.balance = self.balance + amount
+            return True
         else:
-            self.balance = self.account_log.log_deposit(amount, self.balance, False)
-        return
+            return False
+
 
     def __str__(self):
         string = "{}, {}".format(self.account_num, self.full_name)

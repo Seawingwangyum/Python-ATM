@@ -1,6 +1,6 @@
 from tkinter import *
 class balance:
-    def __init__(self, parent):
+    def __init__(self, parent, account):
         self.master = parent
         self.master.geometry("400x140")
         self.information_frame = Frame(self.master)
