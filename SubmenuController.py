@@ -4,6 +4,7 @@ from Withdraw import *
 from Balance import *
 from History import *
 
+# determines what menu is supposed to be open
 class SubmenuControl:
     def __init__(self, last_menu, parent, option, account):
         self.last_menu = last_menu
@@ -26,11 +27,9 @@ class SubmenuControl:
     def deposit_money(self):
         try:
             money = self.deposit_gui.deposit_amount.get()
-            print(money)
             accepted = self.account.deposit(int(money))
             if accepted == True:
                 self.master.withdraw()
-                self.account.save_to_transaction_history("Deposit-${}".format(money))
                 messagebox.showinfo(title="confirmation", message="you have depositied ${}".format(money))
                 self.last_menu.deiconify()
                 self.master.destroy()
@@ -77,3 +76,5 @@ class SubmenuControl:
     def open_history(self):
         self.history_gui = history(self.master)
         self.history_gui.return_button.config(command=self.cancel_transaction)
+        self.history_gui.history_list.config(yscrollcommand=self.history_gui.history_scrollbar.set)
+        for entry in self.account.read_history_logs():

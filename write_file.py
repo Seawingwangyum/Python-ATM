@@ -30,6 +30,6 @@ def write_file(option, account): #OPTIONS: 1 = UPDATE/CHANGE , 2 = ADD USER, 3 =
 
 
 if __name__ == "__main__":
-    write_file(1,['10004','Justin Salisi','1996', 'savings','12345678901234569','30000','10004.csv'])
+    write_file(1,['10004','Justin Salami','1996', 'savings','12345678901234569','30000','10004.csv'])
     write_file(2, ['10005', 'Travis Chan', '1999', 'savings', '12345678901234570', '29000', '10005.csv'])
     write_file(3, ['10005', 'Travis Chan', '1999', 'savings', '12345678901234570', '29000', '10005.csv'])

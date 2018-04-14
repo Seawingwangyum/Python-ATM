@@ -34,7 +34,7 @@ class LoginController:
         if len(all_accounts) > 0:
             for user in all_accounts:
                 self.newwindow = Toplevel()
-                # self.master.withdraw()
+                self.master.withdraw()
                 MainController(self.master,self.newwindow,user[0])
                 self.empty_text_boxes()
 

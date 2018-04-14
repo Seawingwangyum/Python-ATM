@@ -1,5 +1,6 @@
 #from Transactionlog import *
 import datetime
+from write_file import *
 
 
 class acc_info:
@@ -15,50 +16,48 @@ class acc_info:
         self.transaction_history = []
         return
 
-
-    @property
-    def return_balance(self):
-        return 'Balance is ${}'.format(self.balance)
-
-
     def withdraw(self, amount):
+        # withdraws money from an account, and appends to logs
         if (amount <= self.balance) and (amount > 0):
             self.balance -= amount
+            self.save_to_transaction_history("Withdrew - ${}".format(amount))
+            self.update_balance()
             return True
         else:
             return False
 
     def deposit(self, amount):
+        # deposits money into an account, and appends to logs
         if amount > 0:
             self.balance = self.balance + amount
+            self.save_to_transaction_history("Deposited - ${}".format(amount))
+            self.update_balance()
             return True
         else:
             return False
 
-
-    def change_first_name(self, new_name):
-        self.first_name = new_name
-        return
-
-    def change_last_name(self, new_name):
-        self.last_name = new_name
-        return
-    """
-    def charge_fee(self):
-        self.balance = self.account_log.log_fee(account.__CHARGE_FEE, self.balance)
-    """
     def save_to_transaction_history(self, transaction):
         now = datetime.datetime.now()
-        self.transaction_history.append("{}-{}".format(now,transaction))
+        self.transaction_history.append(": {}- {}".format(now,transaction))
+        self.write_to_logs()
         return
 
-    def display_transaction(self):
-        pass
+    def write_to_logs(self):
+        with open(self.transactionlog, 'a') as translog:
+            for action in self.transaction_history:
+                translog.write("{}\n".format(action))
 
-    def pay_interest(self):
-        self.balance = self.balance
-        return
+    def read_history_logs(self):
+        history = []
+        with open(self.transactionlog, 'r') as translog:
+            lines = translog.readlines()
+            for line in lines:
+                history.append(line.rstrip('\n'))
+            return history
 
+    def update_balance(self):
+        account_list = [self.acc_num, self.name, self.password, self.acc_type, self.card_num, str(self.balance), self.transactionlog]
+        write_file(1, account_list)
 
 if __name__ == "__main__":
     pass

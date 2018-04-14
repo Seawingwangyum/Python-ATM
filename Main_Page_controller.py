@@ -56,6 +56,7 @@ class MainController:
         self.newwindow = Toplevel()
     
     def logout(self):
+        self.account_info.write_to_logs()
         self.last_menu.deiconify()
         self.master.destroy()
 
