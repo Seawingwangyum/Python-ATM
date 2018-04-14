@@ -57,6 +57,8 @@ class acc_info:
                 return history
         except FileNotFoundError:
             self.write_to_logs()
+        except TypeError:
+            self.write_to_logs()
 
     def update_balance(self):
         account_list = [self.acc_num, self.name, self.password, self.acc_type, self.card_num, str(self.balance), self.transactionlog]

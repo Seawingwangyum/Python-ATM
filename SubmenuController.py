@@ -33,9 +33,11 @@ class SubmenuControl:
                 messagebox.showinfo(title="confirmation", message="you have depositied ${}".format(money))
                 self.last_menu.deiconify()
                 self.master.destroy()
+            else:
+                messagebox.showinfo(title="Invalid", message="Selection Invalid")
         except ValueError:
             self.master.withdraw()
-            messagebox.showinfo(title="Invalid", message="trevor is a soyboy")
+            messagebox.showinfo(title="Invalid", message="Selection Invalid")
             self.master.deiconify()
 
     def withdraw_money(self):
@@ -48,9 +50,11 @@ class SubmenuControl:
                 self.master.deiconify()
                 self.last_menu.deiconify()
                 self.master.destroy()
+            else:
+                messagebox.showinfo(title="Invalid", message="Selection Invalid")
         except ValueError:
             self.master.withdraw()
-            messagebox.showinfo(title="Invalid", message="trevor is a soyboy")
+            messagebox.showinfo(title="Invalid", message="Selection Invalid")
             self.master.deiconify()
 
    
