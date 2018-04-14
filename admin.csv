@@ -1,0 +1,4 @@
+"account number"," name"," pin"," type"," cc#"," balance"," translog"
+"10001","Linden Wong","1995","savings","1234567890123456","30000","10001.csv"
+"10002","Trevor Redmond","1999","savings","1234567890123457","30000","10002.csv"
+"10003","Siming Yang","1999","savings","1234567890123458","30000","10003.csv"
