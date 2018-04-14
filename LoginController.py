@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 import csv
-from Main_Page_controller import *
+from Main_Page_controller import MainController
 from LoginScreen import loginscreen
 
 
@@ -35,12 +35,9 @@ class LoginController:
             for user in all_accounts:
                 self.newwindow = Toplevel()
                 # self.master.withdraw()
-                MainController(self.newwindow,user[0])
-                self.logout = lambda: self.onCloseOtherFrame(self.newwindow)
-                self.logout_button = Button(self.newwindow, text="done", command=self.logout)
-                self.logout_button.grid(row=2, padx=5, pady=10)
-                self.login_gui.name_entry.delete(0,'end')
-                self.login_gui.pass_entry.delete(0,'end')
+                MainController(self.master,self.newwindow,user[0])
+                self.empty_text_boxes()
+
 
         elif user_exist == 0:
             messagebox.showinfo(title='Not in database', message='Credit Card Number is not in our Files')
@@ -48,9 +45,10 @@ class LoginController:
         elif password_correct == 0:
             messagebox.showinfo(title='Incorrect Pin', message='Incorrect Pin, Please try again')
 
-    def onCloseOtherFrame(self, otherframe):
-        otherframe.destroy()
-        self.master.deiconify()
+    def empty_text_boxes(self):
+        self.login_gui.name_entry.delete(0,'end')
+        self.login_gui.pass_entry.delete(0,'end')
+
 
 
 

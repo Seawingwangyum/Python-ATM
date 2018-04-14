@@ -1,21 +1,17 @@
 from tkinter import *
 from tkinter import messagebox
 import csv
-from Deposit import *
-from Withdraw import *
-from Check_Balance import *
-from LoginController import *
 from tempfile import NamedTemporaryFile
 import shutil
-from Controller import *
-
-
+from Model import *
+from SubmenuController import SubmenuControl
 from Main_Page import MainWindow
 
 
 class MainController:
-    def __init__(self, parent, account):
+    def __init__(self, last_menu, parent, account):
         bank_account = self.open_file(account)
+        self.last_menu = last_menu
         self.account_info = acc_info(bank_account)
         self.master = parent
         self.main_gui = MainWindow(self.master, bank_account[1])
@@ -23,6 +19,9 @@ class MainController:
         self.main_gui.deposit_button.config(command=self.deposit)
         self.main_gui.withdraw_button.config(command=self.withdraw)
         self.main_gui.check_balance_button.config(command=self.check_balance)
+        self.main_gui.check_history_button.config(command=self.check_history)
+        self.main_gui.done_button.config(command=self.logout)
+
 
     def open_file(self,account):
         with open('account.csv', 'r') as bank_accounts:
@@ -37,19 +36,28 @@ class MainController:
         return bank_account
 
     def deposit(self):
-        self.master.withdraw()
-        self.newwindow = Toplevel(self.master)
-        deposit(self.master,self.newwindow, self.account_info)
+        self.hide_menu()
+        SubmenuControl(self.master,self.newwindow, "deposit",self.account_info)
         
     def withdraw(self):
-        self.master.withdraw()
-        self.newwindow = Toplevel(self.master)
-        withdraw(self.master, self.newwindow, self.account_info)
+        self.hide_menu()
+        SubmenuControl(self.master, self.newwindow, 'withdraw',self.account_info)
 
     def check_balance(self):
-        #self.master.withdraw()
+        self.hide_menu()
+        SubmenuControl(self.master, self.newwindow, 'balance',self.account_info)
+
+    def check_history(self):
+        self.hide_menu()
+        SubmenuControl(self.master, self.newwindow, "history", self.account_info)
+
+    def hide_menu(self):
+        self.master.withdraw()
         self.newwindow = Toplevel()
-        check_balance(self.master, self.newwindow, self.account_info)
+    
+    def logout(self):
+        self.last_menu.deiconify()
+        self.master.destroy()
 
         
 
@@ -58,6 +66,6 @@ class MainController:
 
 if __name__ == "__main__":
     root = Tk()
-    MainController(root,'10003')
+    MainController("last window",root,'10003')
     mainloop()
-    write_file(['10004','Justin Salisi','1996', 'savings','12345678901234569','25000','10004.csv'])
+    # write_file(['10004','Justin Salisi','1996', 'savings','12345678901234569','25000','10004.csv'])
