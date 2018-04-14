@@ -4,7 +4,7 @@ from Withdraw import *
 from Balance import *
 from History import *
 
-# determines what menu is supposed to be open
+# determines what menu is supposed to be o
 class SubmenuControl:
     def __init__(self, last_menu, parent, option, account):
         self.last_menu = last_menu
@@ -78,3 +78,4 @@ class SubmenuControl:
         self.history_gui.return_button.config(command=self.cancel_transaction)
         self.history_gui.history_list.config(yscrollcommand=self.history_gui.history_scrollbar.set)
         for entry in self.account.read_history_logs():
+            self.history_gui.history_list.insert(END, entry)

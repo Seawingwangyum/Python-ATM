@@ -48,12 +48,15 @@ class acc_info:
                 translog.write("{}\n".format(action))
 
     def read_history_logs(self):
-        history = []
-        with open(self.transactionlog, 'r') as translog:
-            lines = translog.readlines()
-            for line in lines:
-                history.append(line.rstrip('\n'))
-            return history
+        try:
+            history = []
+            with open(self.transactionlog, 'r') as translog:
+                lines = translog.readlines()
+                for line in lines:
+                    history.append(line.rstrip('\n'))
+                return history
+        except FileNotFoundError:
+            self.write_to_logs()
 
     def update_balance(self):
         account_list = [self.acc_num, self.name, self.password, self.acc_type, self.card_num, str(self.balance), self.transactionlog]
