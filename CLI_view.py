@@ -7,7 +7,7 @@ class Terminal:
         return input("\nEnter your option from above: ")
 
     def v_login(self):
-        return input('Username: ')
+        return input('\nUsername: ')
 
     def v_password(self):
         return input('Password: ')
@@ -26,74 +26,41 @@ class Terminal:
         return input("Enter user account card number: ")
 
     def edit_user(self):
-        print("\nOptions:\n1 - View Account Info\n2 - Change Account Type\n3 - Change Account Name\n4 - Remove Funds")
-        print("5 - Add Funds\n6 - Transfer Funds\n7 - Back")
+        print("\nOptions:\n1 - Update/Change\n2 - Add user\n3 - Remove user")
         return input("\nEnter your option from above: ")
-
-    def account_info(self):
-        print("\nAccount Info")
 
     def account_does_not_exist(self):
         print("\nAccount number does not exist. Please try again. ")
-#-------------------
-
-    def change_account_type(self):
-        print("\nOptions:\n1 - Account\n2 - Account\n 3 - Account\nBack")
-        return input("Enter option: ")
-
-    def changed_account_type(self, new_type):
-        print("Changed account type to %s." % new_type)
-#-------------------
-
-    def change_account_name(self):
-        return input("Enter new Account name: ")
-
-    def changed_account_name(self, new_name):
-        print("Changed account name to %s." % new_name)
-#-------------------
-
-    def remove_funds(self):
-        return input("Enter amount to remove: ")
-
-    def removed_funds(self, amount):
-        print("Removed %s from Account." % amount)
-
-#-------------------
-
-    def add_funds(self):
-        return input("Enter amount to add: ")
-
-    def added_funds(self, amount):
-        print("Added %s to Account." % amount)
-
-#-------------------
-
-    def transfer_to(self):
-        return input("Enter account name you would like to transfer funds to: ")
-
-    def transfer_funds(self):
-        return input("Enter amount to transfer: ")
-
-    def transferred_funds(self, account, amount):
-        print("Trasnferred $%s to %s." % amount, account)
-
-#-------------------------------------
-
-
 
 #-----------Add new Account------------
 
 #askname
     def ask_name(self):
-        return input("Enter new account name: ")
+        return input("Enter account name: ")
 #askpin
     def ask_pin(self):
-        return input("Enter the password for this account: ")
+        return input("Enter the password for this account (4 digits): ")
 #asktype
     def ask_type(self):
-        print("\nAccount1 \nAccount2 \nAccount3")
-        return input("Enter what type of account will be made using options above: ")
+        return input("Enter the type of account (Chequing, Savings): ")
 
+    def ask_number(self):
+        return input("Enter the account number (5 digits): ")
+
+    def ask_card(self):
+        return input("Enter the credit card number for this account (16 digits): ")
+
+    def ask_balance(self):
+        return input("Enter the balance: ")
+
+    def ask_file(self):
+        return input("Enter the filename of the transaction log: ")
+
+    def account_success(self):
+        print("New account created.")
+
+    def account_fail(self):
+        print("New account was unable to be created. Please re-enter info.")
 #--------------------------------------
 
 

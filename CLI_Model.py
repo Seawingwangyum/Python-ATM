@@ -1,4 +1,7 @@
 import csv
+from tempfile import NamedTemporaryFile
+import shutil
+from write_file import write_file
 
 class CLI_Model:
 
@@ -27,43 +30,26 @@ class CLI_Model:
         else:
             return False
 
-#-------------edit users----------------
-
-    def account_info(self, account):
-        with open('account.csv', 'r') as user_accounts:
-            csv_reader = csv.reader(user_accounts)
-
-            next(csv_reader)
-
-            for line in csv_reader:
-                if line[4] == account:
-                    return line
-                else:
-                    return ''
-
-    def change_account_type(self, account, new_type):
-        with open('account.csv', 'r') as user_accounts:
-            csv_reader = csv.reader(user_accounts)
-
-            next(csv_reader)
-
-            for line in csv_reader:
-                if line[4] == account:
-                    line[3] = new_type
-                else:
-                    return ''
-
-    def change_account_name(self, account, new_name):
-        with open('account.csv', 'r') as user_accounts:
-            csv_reader = csv.reader(user_accounts)
-
-            next(csv_reader)
-
-            for line in csv_reader:
-                if line[4] == account:
-                    line[1] = new_name
-                else:
-                    return ''
+#-------------edit users----------
 
     def remove_funds(self, account, amount):
-        pass
+        with open('account.csv', 'r') as user_accounts:
+            csv_reader = csv.reader(user_accounts)
+
+            next(csv_reader)
+
+            for line in csv_reader:
+                if line[4] == account:
+                    if line[5] >= amount:
+                        line[5] -= amount
+                else:
+                    return ''
+
+    def create_user_list(self, number, name, pin, type, cc, balance, file):
+        return [number, name, pin, type, cc, balance, file]
+
+    def write(self, option, account):
+        return write_file(option, account)
+
+    def edit_users(self, number, name, pin, type, cc, balance, file):
+        write_file()

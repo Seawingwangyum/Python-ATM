@@ -16,20 +16,33 @@ class CLI:
             self.view.v_login_fail()
             return False
 
-    def view_account_info(self, card):
-        model_output = self.model.account_info(card)
-        if model_output == '':
-            self.view.account_does_not_exist()
-        else:
-            self.view.account_info()
+    def create_user_list(self):
+        accnum = self.view.ask_number()
+        name = self.view.ask_name()
+        pin = self.view.ask_pin()
+        type = self.view.ask_type()
+        card = self.view.ask_card()
+        bal = self.view.ask_balance()
+        file = self.view.ask_file()
+        return self.model.create_user_list(accnum, name, pin, type, card, bal, file)
+
+    def write(self):
+        self.model.write(self.view.edit_user(), self.create_user_list())
+
+def main():
+    while True:
+        terminal = CLI()
+        while True:
+            login = terminal.view.v_login()
+            password = terminal.view.v_password()
+            initlogin = terminal.login(login, password)
+            if initlogin == True:
+                break
+
+        terminal.write()
+
+
+
 
 if __name__ == '__main__':
-    terminal = CLI()
-    while True:
-        login = terminal.view.v_login()
-        password = terminal.view.v_password()
-        initlogin = terminal.login(login, password)
-        if initlogin == True:
-            break
-
-    terminal.view.options()
+    main()
